@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Navigate } from 'react-router-dom';
 
 const baseUrl = 'http://localhost:3001/api/v1';
 
@@ -12,6 +13,7 @@ const handleOnSignup = async (name, password) => {
         if (response.status === 201) {
             console.log('User created successfully');
             alert('Signup successful');
+            Navigate('/login');
         }
     } catch (error) {
         console.error(error);
@@ -34,7 +36,8 @@ const handleOnLogin = async (name, password) => {
             const d = alert('Login successful');
 
             if (d) {
-                window.location.href = '/home';
+                // window.location.href = '/home';
+                Navigate('/home');
             }
         }
     } catch (error) {
@@ -104,7 +107,7 @@ const createWallet = async () => {
         // console.log(response);
         if (response.status === 201) {
             alert('Wallet created successfully');
-            window.location.href = '/home';
+            window.location.reload();
         }
     } catch (error) {
         console.error(error);

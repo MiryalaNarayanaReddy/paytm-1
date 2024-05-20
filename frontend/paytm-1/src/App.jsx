@@ -7,6 +7,7 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import NavBar from './pages/NavBar'
 import OtherUsers from './pages/OtherUsers.jsx'
+import SendMoney from './pages/SendMoney'
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="sendmoney/*" element={<SendMoney />} />
           <Route path="/otherusers" element={<OtherUsers />} />
         </Routes>
       </BrowserRouter>
