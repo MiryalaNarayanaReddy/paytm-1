@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { WraperCard } from "../components/HelperCards";
 import { ButtonCard, InputCard } from "../components/HelperCards";
-
+import { handleOnSendMoney } from "../helper";
 
 function SendMoney() {
 

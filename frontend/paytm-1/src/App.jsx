@@ -8,7 +8,7 @@ import Signup from './pages/Signup'
 import NavBar from './pages/NavBar'
 import OtherUsers from './pages/OtherUsers.jsx'
 import SendMoney from './pages/SendMoney'
-
+import Transactions from './pages/Transactions'
 
 function App() {
 
@@ -23,6 +23,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="sendmoney/*" element={<SendMoney />} />
           <Route path="/otherusers" element={<OtherUsers />} />
+          <Route path="/transactions" element={<Transactions />} />
         </Routes>
       </BrowserRouter>
     </>

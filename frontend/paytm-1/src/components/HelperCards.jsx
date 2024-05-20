@@ -40,7 +40,7 @@ function InputCard({ title, type, placeholder, value, onChange }) {
 function ButtonCard({ title, onClick }) {
   return (
     <div className="text-center">
-      <button onClick={onClick} className=" p-2 bg-blue-500 text-white rounded-lg mt-4 hover:bg-blue-600 ">
+      <button onClick={onClick} className=" p-2 bg-blue-500 text-white rounded-lg mt-4 hover:bg-blue-600 transition duration-500">
       {title}
       </button>
     </div>

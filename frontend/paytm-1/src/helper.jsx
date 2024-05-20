@@ -81,9 +81,37 @@ const getBalanceAmount = async () => {
     }
 }
 
+const handleOnSendMoney = async (amount, id) => {
+    try {
+        const response = await axios.post(`${baseUrl}/transaction/send`, {
+            amount: amount,
+            to_id: id
+        }, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        });
+        // console.log(response);
+        if (response.status === 201) {
+            // alert('Money sent successfully');
+            const d = alert(response.data.message);
+
+            if (d) {
+                Navigate('/otherusers');
+            }
+        }
+    }
+    catch (error) {
+        console.error(error);
+    }
+}
+
+
+
+
 const getTransactionHistory = async () => {
     try {
-        const response = await axios.get(`${baseUrl}/transaction`, {
+        const response = await axios.get(`${baseUrl}/transaction/history`, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('token')}`
             }
@@ -124,6 +152,9 @@ export {
 
     getOtherUsers,
     getBalanceAmount,
-    createWallet
+    createWallet,
+
+    handleOnSendMoney,
+    getTransactionHistory
 }
 

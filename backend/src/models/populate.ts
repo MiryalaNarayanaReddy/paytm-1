@@ -3,6 +3,9 @@ import client from "./db";
 // uuid_generate_v4()
 
 import { v4 as uuidv4 } from 'uuid';
+import bcrypt from 'bcrypt';
+
+const SALT_ROUNDS = 10;
 
 
 // populate the user table with 10 users
@@ -14,7 +17,8 @@ interface User {
 
 const users: User[] = [
     { name: "harry potter", password: "Higb2$67"},
-    { name: "emma watson", password: "Wnns125" },
+    // { name: "emma watson", password: "Wnns125" },
+    { name: "narayana", password: "qaz"},
     { name: "ron weasley", password: "Rtjg$12"},
     { name: "hermione granger", password: "Hgj$12"},
     { name: "albus dumbledore", password: "Dmb$12"},
@@ -23,6 +27,7 @@ const users: User[] = [
     { name: "draco malfoy", password: "Mlf$12"},
     { name: "luna lovegood", password: "Lvg$12"},
     { name: "ginny weasley", password: "Wls$12"},
+  
 
 ]
 
@@ -39,9 +44,12 @@ const users: User[] = [
 
 const populateUserTable = async () => {
     for (const user of users) {
+        const hashpassword = bcrypt.hashSync(user.password, SALT_ROUNDS);
+
+
         const queryText = `INSERT INTO users (id, name, password, created_date, modified_date) VALUES ($1, $2, $3, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`;
         try {
-            const res = await client.query(queryText, [uuidv4(), user.name, user.password]);
+            const res = await client.query(queryText, [uuidv4(), user.name, hashpassword]);
             console.log(res);
         } catch (err) {
             console.log(err);
