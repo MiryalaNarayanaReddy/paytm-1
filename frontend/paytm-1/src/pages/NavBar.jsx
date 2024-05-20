@@ -12,7 +12,7 @@ function NavBar() {
                 localStorage.getItem('token') ?
                     <>
                         <div className="col-span-3">
-                            <a href="/users">users</a>
+                            <a href="/otherusers">users</a>
                         </div>
 
                         <div className="col-span-2">

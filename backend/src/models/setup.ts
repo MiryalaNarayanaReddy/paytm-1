@@ -63,6 +63,22 @@ const createTransactionTable = async () => {
 };
 
 
+// clear the tables
+
+const clearTablesdB = async () => {
+  const queryText = `DROP TABLE IF EXISTS transactions, wallets, users`;
+
+  try {
+    const res = await client.query(queryText);
+    console.log(res);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+
+
+
 function createTablesdB() {
   createUserTable();
   createWalletTable();
@@ -71,4 +87,7 @@ function createTablesdB() {
 
 // createTables();
 
-export default createTablesdB;
+export {
+  createTablesdB,
+  clearTablesdB
+}

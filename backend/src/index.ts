@@ -1,9 +1,12 @@
 import express from 'express'
 import mainRoutes from './routes/mainRoutes'
 import cors from 'cors'
-import createTablesdB from './models/setup'
 import populateTablesdB from './models/populate'
+import { createTablesdB, clearTablesdB } from './models/setup'
 
+
+
+clearTablesdB()
 createTablesdB()
 populateTablesdB()
 

@@ -14,9 +14,28 @@ router.post('/transfer', (req, res) => {
     // if not, return an error message
 
     
+});
 
+router.get('/otherusers', (req, res) => {
+    // res.send('Other Users Route')
 
+    // get all users except the current user
 
+    const user =  req.body.user;
+
+    const queryText = `
+        SELECT id, name FROM users WHERE name != $1
+    `;
+
+    client.query(queryText, [user.name], (err, result) => {
+        if (err) {
+            console.log(err);
+            res.status(400).send('An error occurred');
+        } else {
+            // console.log(result.rows);
+            res.status(200).json(result.rows); // Send the result to the client
+        }
+    });
 
 });
 

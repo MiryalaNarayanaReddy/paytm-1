@@ -12,7 +12,7 @@ router.use('/user', userRoutes); // Use the userRoutes for the /user path
 
 // app.use('/user',userRoutes) // Use the userRoutes for the /user path
 
-app.use(authCheck) // Use the authCheck middleware
+// app.use(authCheck) // Use the authCheck middleware
 router.use('/wallet', authCheck ,walletRoutes) // Use the walletRoutes for the /wallet path
 router.use('/transaction', authCheck,transactionRoutes) // Use the transactionRoutes for the /transaction path
 
