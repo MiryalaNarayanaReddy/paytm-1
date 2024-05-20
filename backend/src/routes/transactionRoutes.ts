@@ -4,28 +4,30 @@ import { Session } from 'inspector';
 import {v4 as uuidv4} from 'uuid';
 
 const router = express.Router();
+
 router.post('/send', async (req, res) => {
-    const user = req.body.user;
-    const to_id = req.body.to_id;
-    const amount = req.body.amount;
+    const { user, to_id, amount } = req.body;
 
     try {
-        // Check if the user has enough balance
+        // Begin transaction
+        await client.query('BEGIN');
+
+        // Check if the user has enough balance and lock the row
         const balanceResult = await client.query(`
-            SELECT balance FROM wallets WHERE user_id = $1
+            SELECT balance FROM wallets WHERE user_id = $1 FOR UPDATE
         `, [user.id]);
 
         if (balanceResult.rows.length === 0) {
+            await client.query('ROLLBACK');
             return res.status(400).send('User not found');
         }
 
-        const balance = balanceResult.rows[0].balance;
-        if (balance < amount) {
+        const balance = parseFloat(balanceResult.rows[0].balance);
+
+        if (balance < parseFloat(amount)) {
+            await client.query('ROLLBACK');
             return res.status(400).send('Insufficient balance');
         }
-
-        // Begin transaction
-        await client.query('BEGIN');
 
         // Deduct the amount from the user's balance
         await client.query(`

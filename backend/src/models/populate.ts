@@ -73,7 +73,7 @@ const populateUserTable = async () => {
 
 const populateWalletTable = async () => {
     for (const user of users) {
-        const queryText = `INSERT INTO wallets (id, balance, user_id, created_date, modified_date) VALUES ($1, 1000, (SELECT id FROM users WHERE name = $2), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`;
+        const queryText = `INSERT INTO wallets (id, balance, user_id, created_date, modified_date) VALUES ($1, 1000.00, (SELECT id FROM users WHERE name = $2), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`;
         try {
             const res = await client.query(queryText, [uuidv4(), user.name]);
             console.log(res);
@@ -100,7 +100,7 @@ const populateWalletTable = async () => {
 
 const populateTransactionTable = async () => {
     for (let i = 0; i < 9; i++) {
-        const queryText = `INSERT INTO transactions (id, amount, sender_id, receiver_id, created_date, modified_date) VALUES ($1, 100, (SELECT id FROM users WHERE name = $2), (SELECT id FROM users WHERE name = $3), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`;
+        const queryText = `INSERT INTO transactions (id, amount, sender_id, receiver_id, created_date, modified_date) VALUES ($1, 100.00, (SELECT id FROM users WHERE name = $2), (SELECT id FROM users WHERE name = $3), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`;
         try {
             const res = await client.query(queryText, [uuidv4(), users[i].name, users[i + 1].name]);
             console.log(res);

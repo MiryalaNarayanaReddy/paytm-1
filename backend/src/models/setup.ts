@@ -26,7 +26,7 @@ const createWalletTable = async () => {
   const queryText = `CREATE TABLE IF NOT EXISTS
       wallets(
         id UUID PRIMARY KEY,
-        balance NUMERIC NOT NULL,
+        balance NUMERIC(20, 2) NOT NULL,
         user_id UUID REFERENCES users(id),
         created_date TIMESTAMP,
         modified_date TIMESTAMP
@@ -47,7 +47,7 @@ const createTransactionTable = async () => {
   const queryText = `CREATE TABLE IF NOT EXISTS
       transactions(
         id UUID PRIMARY KEY,
-        amount NUMERIC NOT NULL,
+        amount NUMERIC(20, 2) NOT NULL,
         sender_id UUID REFERENCES users(id),
         receiver_id UUID REFERENCES users(id),
         created_date TIMESTAMP,

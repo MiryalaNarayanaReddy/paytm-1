@@ -44,7 +44,7 @@ function NavBar() {
                         <NavItem title="Transactions" href="/transactions" />
                         <div className="col-span-6 pt-2 justify-end flex">
                             <NavItem title="Logout" href="/logout" onClick={() => {
-                                localStorage.clear()
+                                localStorage.removeItem('token')
                                 Navigate('/login')
                             }} />
                         </div>
